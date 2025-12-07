@@ -25,7 +25,7 @@ The API allows:
 
 ---
 
-### 2.2 Clone the Repository
+### 2.2 Cloning the Repository
 
 ```bash
 git clone https://github.com/SriRama-Bonthu/blog-api.git
@@ -34,7 +34,7 @@ cd blog-api
 
 ---
 
-## 2.3 Install Dependencies
+## 2.3 Installing Dependencies
 
 ```bash
 npm install
@@ -44,7 +44,7 @@ npm install
 
 ## 2.4 Database Configuration
 
-Open MySQL and create the database:
+Open MySQL and created the database:
 
 ```sql
 CREATE DATABASE blog_api_db
@@ -58,12 +58,10 @@ Open the file:
 config/db.js
 ```
 
-Update it with your MySQL credentials:
-
 ```js
 const { Sequelize } = require("sequelize");
 
-const sequelize = new Sequelize("blog_api_db", "root", "YOUR_PASSWORD", {
+const sequelize = new Sequelize("blog_api_db", "root", "Sriramcse@123", {
   host: "localhost",
   dialect: "mysql",
   logging: false,
@@ -72,11 +70,9 @@ const sequelize = new Sequelize("blog_api_db", "root", "YOUR_PASSWORD", {
 module.exports = sequelize;
 ```
 
-Replace `YOUR_PASSWORD` with your actual MySQL password.
-
 ---
 
-## 2.5 Run the Application
+## 2.5 To Run the Application
 
 ```bash
 npm run dev
@@ -85,9 +81,9 @@ npm run dev
 If everything is configured correctly, you will see:
 
 ```text
-✅ MySQL connection OK
-✅ Models synchronized
-🚀 Server running at http://localhost:3000
+MySQL connection OK
+Models synchronized
+Server running at http://localhost:3000
 ```
 
 ---
@@ -154,6 +150,44 @@ POST /authors
   "email": "john@example.com"
 }
 ```
+Response (201):
+```json
+{
+  "id": 1,
+  "name": "John Doe",
+  "email": "john@example.com"
+}
+```
+### GET Author  
+GET /authors/1
+
+```json
+[
+  {
+    "id": 1,
+    "name": "John Doe",
+    "email": "john@example.com"
+  }
+]
+```
+### UPDATE Author  
+PUT /authors/1
+
+```json
+  {
+    "id": 1,
+    "name": "John Doe Wick",
+    "email": "johndoe@example.com"
+  }
+```
+### DELETE Author  
+DELETE /authors/1
+
+```json
+  {
+  "message": "Author deleted"
+}
+```
 
 ---
 
@@ -169,25 +203,44 @@ POST /posts
   "authorId": 1
 }
 ```
+### GET Posts
+GET /posts/1
 
----
-
-## 5. Error Handling
-
-- 400 – Invalid input
-- 404 – Resource not found
-- 500 – Internal server error
-
----
-
-## 6. Postman Collection (Optional)
+```json
+[
+  {
+    "id": 1,
+    "title": "My First Post",
+    "content": "This is my first post",
+    "author": {
+      "name": "John Doe",
+      "email": "john@example.com"
+    }
+  }
+]
 
 ```
-blog-api.postman_collection.json
+### Update Posts
+PUT /posts/1
+
+```json
+{
+  "title": "New Post",
+  "content": "This is the updated from first to new"
+}
+
+
 ```
+### Delete Posts
+DELETE /posts/1
+
+```json
+{
+  "message": "Post deleted successfully"
+}
+```
+
 
 ---
 
-## 7. GitHub Repository
 
-https://github.com/SriRama-Bonthu/blog-api
